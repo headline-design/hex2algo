@@ -1,0 +1,21 @@
+<input id="hex" type="text" />
+<button onclick="hexToBytes()">Convert</button>
+<h4 id="result"></h4>
+<script src="algosdk.min.js"></script>
+<script>
+    function hexToBytes() {
+        let hexb = document.getElementById("hex").value
+        alert(hexb)
+        let bytes = []
+
+        for (let c = 0; c < hexb.length; c += 2) {
+            bytes.push(parseInt(hexb.substr(c, 2), 16))
+        }
+        
+        bytes.pop()
+
+        console.log(bytes)
+
+        document.getElementById("result").innerText = algosdk.encodeAddress(bytes)
+    }
+</script>
