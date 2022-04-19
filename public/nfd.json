@@ -1,0 +1,14 @@
+{
+    "name": "Astro #220",
+    "description": "Algo Astros, An NFT Collection from the HEADLINE Team.",
+    "image": "ipfs://QmPntG5UdzPifpDaxMAwi1Fdh4e9Nr6jeeHApLSsrV7LJo",
+    "decimals": 0,
+    "unitName": "ASTRO220",
+    "image_integrity": "(sha256-18C15D17D33E6AA1C8579F740F9684C069F56C5F8750745C157F79FA528AC997",
+    "image_mimetype": "image/jpeg",
+    "properties": {
+        "Logo": "NFDomains",
+        "Background": "Code"
+    }
+}
+
