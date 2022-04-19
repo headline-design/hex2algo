@@ -132,11 +132,11 @@ class App extends React.Component{
           </li>
           <li >
           <a
-              href="https://arc3.xyz/nft/84622403"
+              href="https://arc3.xyz/nft/708106509"
               rel="noopener"
               target="_blank"
             >
-              Example ARC19 NFT (testnet)
+              Example ARC19 NFT (ASTRO220)
             </a>
           </li>
         </ul>
