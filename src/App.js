@@ -45,7 +45,7 @@ class App extends React.Component{
             >
               NFDomains
             </a>. For the first time, upgradeable NFTs are available on Algorand. 
-    The ARC19 hexToAlgo Generator was built by <strong>HEADLINE</strong> to accelerate ARC19 adoption by simplifying the hex conversion proccess.
+    The ARC19 hexToAlgo Generator was built by <strong>HEADLINE</strong> to accelerate ARC19 adoption by simplifying the hex conversion process.
     </p>
     <div className="mb-5">
       <a href="/nfd.json" className="btn btn-primary btn-lg px-4" download>
