@@ -2,6 +2,7 @@ import logo from './logo.svg';
 import './App.css';
 import algosdk from 'algosdk'
 import React from 'react'
+import { CID } from "multiformats/cid";
 
 class App extends React.Component{
   constructor(props){
@@ -9,6 +10,52 @@ class App extends React.Component{
     this.state = {
       address:""
     }
+  }
+
+
+  codeToCodec = (code) => {
+    switch (code.toString(16)) {
+      case "55":
+        return "raw";
+      case "70":
+        return "dag-pb";
+      default:
+        throw new Error("Unknown codec");
+    }
+  };
+
+  cidToReserveURL = (ipfshash) => {
+    const [cid, filename] = ipfshash.split("/");
+
+    const decoded = CID.parse(cid);
+    const version = decoded.version;
+    const codec = this.codeToCodec(decoded.code);
+
+    if (version === 0 && filename) {
+      throw new Error('CID version 0 does not support directories');
+    }
+
+    const url = `template-ipfs://{ipfscid:${version}:${codec}:reserve:sha2-256}${
+      filename ? "/" + filename : ""
+    }`;
+
+    const reserveAddress = algosdk.encodeAddress(
+      Uint8Array.from(Buffer.from(decoded.multihash.digest))
+    );
+
+    return {
+      url,
+      reserveAddress,
+    };
+  };
+
+  handleClickConvert(ipfshash) {
+    const { url, reserveAddress } = this.cidToReserveURL(ipfshash);
+
+    this.setState({
+      url,
+      address: reserveAddress,
+    });
   }
 
   hexToBytes = (hex = []) => {
@@ -55,9 +102,16 @@ class App extends React.Component{
     <hr className="col-3 col-md-2 mb-5" />
     <h2>hexToAlgo Generator</h2>
     <input className="form-control" id="hex"></input>
-      <button className="w-100 btn btn-primary btn-lg mt-3 mb-3" onClick={()=>{this.hexToBytes(document.getElementById("hex").value)}}>
+      <button className="w-100 btn btn-primary btn-lg mt-3 mb-3" onClick={()=>{this.handleClickConvert(document.getElementById("hex").value)}}>
         Convert
       </button>
+      <div
+        className="alert alert-secondary alert-dismissible fade show"
+        role="alert"
+      >
+        URL: &nbsp; 
+        { this.state.url}
+      </div>
       <div
   className="alert alert-secondary alert-dismissible fade show"
   role="alert"
